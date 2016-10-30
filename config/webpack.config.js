@@ -7,26 +7,22 @@ const core = require("./webpack.core");
  * url: https://webpack.github.io/docs/configuration.html
  */
 const webpackConfig = merge(core, {
-    devtool: '#source-map',
-    module: {
-        loaders: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                loader: 'awesome-typescript'
-            }
-        ]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('development')
-            }
-        }),
-        new webpack.BannerPlugin({
-            banner: 'console.warn("This script is development version.");',
-            raw: true
-        })
+  devtool: '#source-map',
+  module: {
+    rules: [
+      {test: /\.ts/, exclude: /node_modules/, loaders: ['awesome-typescript-loader', 'angular2-template-loader']}
     ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      }
+    }),
+    new webpack.BannerPlugin({
+      banner: 'console.warn("This script is development version.");',
+      raw: true
+    })
+  ]
 });
 module.exports = webpackConfig;

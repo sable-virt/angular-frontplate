@@ -1,40 +1,43 @@
 'use strict';
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const ClosureCompiler = require.main.require('google-closure-compiler-js').webpack;
 const core = require("./webpack.core");
+const AotPlugin = require('@ngtools/webpack').AotPlugin;
+
 /**
  * webpack config for production
  * url: https://webpack.github.io/docs/configuration.html
  */
 const webpackConfig = merge(core,{
-    module: {
-        loaders: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                loader: 'awesome-typescript'
-            }
-        ]
-    },
-    plugins: [
-        new ClosureCompiler({
-            options: {
-                languageIn: 'ECMASCRIPT6',
-                languageOut: 'ECMASCRIPT5',
-                compilationLevel: 'ADVANCED',
-                warningLevel: 'QUIET',
-            },
-        }),
-        // new webpack.optimize.CommonsChunkPlugin('app','app.js'),
-        new webpack.optimize.AggressiveMergingPlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        })
-    ],
+  module: {
+    rules: [
+      {test: /\.ts/, loaders: ['@ngtools/webpack']}
+    ]
+  },
+  plugins: [
+    new AotPlugin({
+      tsConfigPath: './tsconfig.json',
+      entryModule: 'src/js/app/app.module#AppModule'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      },
+      comments: false
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ],
 });
 module.exports = webpackConfig;
