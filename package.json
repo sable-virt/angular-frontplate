@@ -33,7 +33,6 @@
     "serve": "frp serve",
     "production": "frp build -p",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -w -s -r 0",
-    "typings": "typings install",
     "map": "frp build && source-map-explorer public/assets/js/app.js public/assets/js/maps/app.map"
   },
   "repository": {
