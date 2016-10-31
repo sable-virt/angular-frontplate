@@ -4,7 +4,8 @@
     "module": "es2015",
     "moduleResolution": "node",
     "lib": [
-      "es2015", "dom"
+      "es2015",
+      "dom"
     ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -18,7 +19,7 @@
     "node_modules"
   ],
   "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true // Allows other loaders to be chained to awesome-typescript-loader.
+    "useWebpackText": true
   },
   "angularCompilerOptions": {
     "genDir": "src/js/app"
