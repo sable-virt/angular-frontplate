@@ -20,14 +20,8 @@ const webpackConfig = merge(core,{
       entryModule: 'src/js/app/app.module#AppModule'
     }),
     new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
       compress: {
-        warnings: false,
-        screw_ie8: true
+        warnings: false
       },
       comments: false
     }),
