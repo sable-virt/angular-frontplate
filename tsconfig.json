@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "sourceRoot": "src/js",
+    "baseUrl": "src/js",
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
@@ -7,21 +9,29 @@
       "es2015",
       "dom"
     ],
+    "declaration": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "sourceMap": true,
-    "noEmit": true
+    "noEmit": false,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
   },
-  "include": [
-    "src/**/*.ts"
-  ],
+  "compileOnSave": true,
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*-aot.ts",
+    "public",
+    "config"
+  ],
+  "typeRoots": [
+    "node_modules/@types"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true
   },
   "angularCompilerOptions": {
-    "genDir": "src/js/app"
+    "genDir": "."
   }
 }
