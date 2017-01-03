@@ -36,10 +36,6 @@ const webpackConfig = {
     ]
   },
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname,'../'),
-      manifest: require('../vendor-manifest.json')
-    }),
     new webpack.LoaderOptionsPlugin({
       options: {
         context: path.join(__dirname,'../'),

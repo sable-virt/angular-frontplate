@@ -31,6 +31,10 @@ const webpackConfig = merge(core, {
         postcss: require('./postcss.config')
       }
     }),
+    new webpack.DllReferencePlugin({
+      context: path.join(__dirname,'../../'),
+      manifest: require('../../vendor-manifest.json')
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
