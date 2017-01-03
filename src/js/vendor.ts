@@ -31,3 +31,6 @@ import 'core-js/es7/reflect';
 // import 'core-js/es7/system';
 import 'zone.js/dist/zone';
 import '@angular/core';
+import '@angular/platform-browser';
+import '@angular/common';
+import '@angular/router';

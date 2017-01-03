@@ -10,15 +10,14 @@ const AotPlugin = require('@ngtools/webpack').AotPlugin;
  * url: https://webpack.github.io/docs/configuration.html
  */
 const webpackConfig = merge(core, {
-  // devtool: '#source-map',
+  devtool: '#source-map',
   module: {
     rules: [
       {
         test: /\.ts/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
         loaders: [
-          'angular2-router-loader',
-          'angular2-template-loader',
+          'angular2-router-loader?aot=true&debug=true',
           '@ngtools/webpack'
         ]
       }
@@ -43,14 +42,14 @@ const webpackConfig = merge(core, {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      comments: false
-    })
+    // new webpack.optimize.AggressiveMergingPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   comments: false
+    // })
   ]
 });
 module.exports = webpackConfig;
