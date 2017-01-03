@@ -4,46 +4,32 @@ const webpack = require("webpack");
 const merge = require("webpack-merge");
 const core = require("../webpack.core");
 
-const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 /**
  * webpack config
  * url: https://webpack.github.io/docs/configuration.html
  */
 const webpackConfig = merge(core, {
   devtool: '#source-map',
+  entry: {
+    app: ['./src/js/app.ts']
+  },
   module: {
     rules: [
       {
         test: /\.ts/,
-        exclude: /node_modules/,
         loaders: [
           'awesome-typescript-loader',
-          'angular2-router-loader',
-          'angular2-template-loader'
+          'angular2-template-loader',
+          'angular2-router-loader'
         ]
       }
     ]
   },
   plugins: [
-    new WebpackBuildNotifierPlugin({
-      title: "frp task script",
-      suppressSuccess: true
-    }),
     new webpack.LoaderOptionsPlugin({
       options: {
-        context: path.join(__dirname,'../../'),
-        output: { path :  path.join(__dirname,'../../') },
-        postcss: require('./postcss.config'),
-        sassLoader: {
-          includePaths: [
-            path.join(__dirname,'../../node_modules')
-          ]
-        },
+        postcss: require('./postcss.config')
       }
-    }),
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname,'../../'),
-      manifest: require('../../vendor-manifest.json')
     }),
     new webpack.DefinePlugin({
       'process.env': {

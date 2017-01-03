@@ -9,6 +9,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    declarations: []
+    declarations: [DetailComponent]
 })
 export class DetailRoutingModule {}

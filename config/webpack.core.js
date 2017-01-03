@@ -7,9 +7,6 @@ const entries = require("webpack-entries");
  * url: https://webpack.github.io/docs/configuration.html
  */
 const webpackConfig = {
-  entry: {
-    app: ['./src/js/app.ts']
-  },
   output: {
     path: FRP_DEST + '/assets/js',
     publicPath: '/assets/js/',
@@ -34,16 +31,26 @@ const webpackConfig = {
       },
       {
         test: /\.(html|css)$/,
-        loader: 'raw-loader',
-        exclude: /\.async\.(html|css)$/
-      },
-      {
-        test: /\.async\.(html|css)$/,
-        loaders: ['file-loader?name=[name].[hash].[ext]', 'extract-loader']
+        loader: 'raw-loader'
       }
     ]
   },
   plugins: [
+    new webpack.DllReferencePlugin({
+      context: path.join(__dirname,'../'),
+      manifest: require('../vendor-manifest.json')
+    }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: path.join(__dirname,'../'),
+        output: { path :  path.join(__dirname,'../') },
+        sassLoader: {
+          includePaths: [
+            path.join(__dirname,'../node_modules')
+          ]
+        },
+      }
+    }),
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
       __dirname

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "src/aot-compiled",
     "sourceRoot": "src/js",
     "baseUrl": "src/js",
     "target": "es5",
@@ -32,7 +33,7 @@
     "useWebpackText": true
   },
   "angularCompilerOptions": {
-    "genDir": ".",
+    "genDir": "src/aot-compiled",
     "skipMetadataEmit" : true
   }
 }

@@ -5,3 +5,4 @@ node_modules
 public
 guide
 vendor-manifest.json
+src/aot-compiled

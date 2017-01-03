@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const core = require("../webpack.core");
-const AotPlugin = require('@ngtools/webpack').AotPlugin;
 
 /**
  * webpack config
@@ -11,14 +10,17 @@ const AotPlugin = require('@ngtools/webpack').AotPlugin;
  */
 const webpackConfig = merge(core, {
   devtool: '#source-map',
+  entry: {
+    app: ['./src/js/app-aot.ts']
+  },
   module: {
     rules: [
       {
         test: /\.ts/,
-        // exclude: /node_modules/,
         loaders: [
-          'angular2-router-loader?aot=true&debug=true',
-          '@ngtools/webpack'
+          'awesome-typescript-loader',
+          'angular2-template-loader',
+          'angular2-router-loader?aot=true&genDir=src/aot-compiled/src/js/app'
         ]
       }
     ]
@@ -29,27 +31,19 @@ const webpackConfig = merge(core, {
         postcss: require('./postcss.config')
       }
     }),
-    new AotPlugin({
-      tsConfigPath: path.join(__dirname,'../../tsconfig.json'),
-      entryModule: path.join(__dirname,'../../src/js/app/app.module#AppModule')
-    }),
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname,'../../'),
-      manifest: require('../../vendor-manifest.json')
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    // new webpack.optimize.AggressiveMergingPlugin(),
-    // new webpack.optimize.OccurrenceOrderPlugin(),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   },
-    //   comments: false
-    // })
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      comments: false
+    })
   ]
 });
 module.exports = webpackConfig;
