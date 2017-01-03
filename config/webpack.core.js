@@ -12,7 +12,7 @@ const webpackConfig = {
   },
   output: {
     path: FRP_DEST + '/assets/js',
-    publicPath: '/assets',
+    publicPath: '/assets/js/',
     filename: "[name].js",
     sourceMapFilename: 'maps/[name].map',
     jsonpFunction: 'fr',
