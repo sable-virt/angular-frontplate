@@ -22,7 +22,7 @@ npm i frontplate-cli -g
 ```
 
 ```
-npm i && npm run typings
+npm i
 npm start
 ```
 
@@ -42,6 +42,7 @@ npm run build
 # srcディレクトリを監視
 npm run serve
 ```
+
 ### リリースファイル作成
 
 ひと通りの開発が完了した時点で、リリース用のファイルを作成します。
@@ -49,6 +50,24 @@ productionタスクではJSとCSSのソースマップが出力されなくな�
 ```
 npm run production
 ```
+
+productionモードでサーバーを起動して確認するためには上のコマンド実行後に次のコマンドを実行します。
+
+```
+npm run serve:prod
+```
+
+### 依存関係の表示
+
+```
+npm run map
+```
+
+## ToDo
+
+- e2eテスト
+- ユニットテスト部分の拡充
+
 
 ## Dependencies documentation
 
