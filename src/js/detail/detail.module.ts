@@ -1,13 +1,11 @@
-import {NgModule} from '@angular/core';
-import {DetailComponent} from './detail.component';
-import {DetailRoutingModule} from './detail.routing';
+import { NgModule } from '@angular/core';
+import { DetailRoutingModule } from './detail.routing';
 
 @NgModule({
     imports: [
         DetailRoutingModule
     ],
-    declarations: [
-        DetailComponent
-    ]
+    declarations: [],
+    exports: []
 })
 export class DetailModule {}
