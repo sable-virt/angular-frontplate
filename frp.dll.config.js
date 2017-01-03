@@ -2,6 +2,9 @@
 module.exports = function (production) {
   global.FRP_DEST = 'public';
   return {
+    clean: {
+      src: FRP_DEST
+    },
     style: {
       noGuide: true
     },
