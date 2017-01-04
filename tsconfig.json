@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "src/aot-compiled",
-    "sourceRoot": "src/js",
-    "baseUrl": "src/js",
+    "sourceRoot": "src",
+    "baseUrl": "src",
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
