@@ -16,7 +16,7 @@ const webpackConfig = {
     library: '[name]_library'
   },
   resolve: {
-    modules: ['./src/js','./node_modules'],
+    modules: ['./src','./node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {

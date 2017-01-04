@@ -11,7 +11,7 @@ const core = require("../webpack.core");
 const webpackConfig = merge(core, {
   devtool: '#source-map',
   entry: {
-    app: ['./src/js/app.ts']
+    app: ['./src/main.ts']
   },
   module: {
     rules: [

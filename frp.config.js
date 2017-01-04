@@ -2,23 +2,30 @@
 const historyApiFallback = require('connect-history-api-fallback');
 const webpack = require('webpack');
 const path = require('path');
+const merge = require('webpack-merge');
 module.exports = function (production) {
   global.FRP_SRC = 'src';
   global.FRP_DEST = 'public';
-  const webpackConfig = require('./config/dev/webpack.config');
+  const webpackConfig = merge({},require('./config/dev/webpack.config'));
   delete webpackConfig.entry;
   delete webpackConfig.output;
   webpackConfig.plugins = [
     new webpack.LoaderOptionsPlugin({
       options: {
-        context: path.join(__dirname,'../'),
-        output: { path :  path.join(__dirname,'../') },
-        sassLoader: {
-          includePaths: [
-            path.join(__dirname,'../node_modules')
+        // context: path.join(__dirname),
+        // output: { path :  path.join(__dirname) },
+        // sassLoader: {
+        //   includePaths: [
+        //     path.join(__dirname,'node_modules')
+        //   ]
+        // },
+        postcss: {
+          plugins: [
+            require('autoprefixer')({
+              browsers: ['> 3% in JP']
+            })
           ]
-        },
-        postcss: require('./config/dev/postcss.config')
+        }
       }
     }),
     new webpack.ContextReplacementPlugin(
@@ -31,7 +38,9 @@ module.exports = function (production) {
       src: null
     },
     style: {
-      noGuide: true
+      noGuide: true,
+      src: `${FRP_SRC}/assets/sass/style.scss`,
+      dest: `${FRP_DEST}/assets/css`
     },
     html: {
       src: `${FRP_SRC}/*.ejs`,
@@ -40,20 +49,21 @@ module.exports = function (production) {
       }
     },
     copy: {
-      [`${FRP_SRC}/js/**/*.html`]: `${FRP_DEST}/assets/view`,
-      [`${FRP_SRC}/lib/**/*`]: `${FRP_DEST}/assets/lib`
+      [`${FRP_SRC}/**/*.html`]: `${FRP_DEST}/assets/view`,
+      [`${FRP_SRC}/assets/images/**/*`]: `${FRP_DEST}/assets/images`,
+      [`${FRP_SRC}/assets/lib/**/*`]: `${FRP_DEST}/assets/lib`
     },
     server: {
       middleware: [ historyApiFallback() ]
     },
     test: {
       files: [
-        `${FRP_SRC}/js/test.ts`
+        `${FRP_SRC}/test.ts`
       ],
       preprocessors: {
-        '**/*.ts': ['webpack']
+        '**/*': ['webpack']
       },
-      webpack: webpackConfig,
+      webpack: webpackConfig
     },
     script: production ? require('./config/prod/webpack.config') : require('./config/dev/webpack.config')
   }

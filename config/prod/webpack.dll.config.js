@@ -9,7 +9,7 @@ const core = require("../webpack.core");
 const webpackConfig = merge(core, {
   // devtool: '#source-map',
   entry: {
-    vendor: ['./src/js/vendor.ts']
+    vendor: ['./src/vendor.ts']
   },
   plugins: [
     new webpack.DllPlugin({
