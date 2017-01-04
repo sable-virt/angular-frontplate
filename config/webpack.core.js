@@ -16,7 +16,7 @@ const webpackConfig = {
     library: '[name]_library'
   },
   resolve: {
-    modules: ['./src/js'],
+    modules: ['./src/js','./node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   module: {
@@ -51,6 +51,12 @@ const webpackConfig = {
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
       __dirname
     )
-  ]
+  ],
+  watchOptions: {
+    ignored: /node_modules/
+  },
+  performance: {
+    hints: false
+  }
 };
 module.exports = webpackConfig;
