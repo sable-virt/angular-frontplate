@@ -20,7 +20,7 @@ const webpackConfig = merge(core, {
         loaders: [
           'awesome-typescript-loader',
           'angular2-template-loader',
-          'angular2-router-loader?aot=true&genDir=src/aot-compiled/src/js/app'
+          'angular2-router-loader?aot=true&genDir=src/aot-compiled/src/app'
         ]
       }
     ]
@@ -42,7 +42,8 @@ const webpackConfig = merge(core, {
       compress: {
         warnings: false
       },
-      comments: false
+      comments: false,
+      sourceMap: true
     })
   ]
 });
