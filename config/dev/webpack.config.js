@@ -3,7 +3,8 @@ const path = require('path');
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const core = require("../webpack.core");
-
+const loaderOptions = require('../loader-options');
+loaderOptions.postcss = require('./postcss.config');
 /**
  * webpack config
  * url: https://webpack.github.io/docs/configuration.html
@@ -27,9 +28,7 @@ const webpackConfig = merge(core, {
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: require('./postcss.config')
-      }
+      options: loaderOptions
     }),
     new webpack.DllReferencePlugin({
       context: path.join(__dirname,'../../'),

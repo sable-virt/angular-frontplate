@@ -66,7 +66,6 @@ npm run map
 ## ToDo
 
 - カバレッジを取る仕組み
-- tslintの設定
 
 ## Dependencies documentation
 

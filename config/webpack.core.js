@@ -1,5 +1,4 @@
 'use strict';
-const path = require('path');
 const webpack = require("webpack");
 const entries = require("webpack-entries");
 /**
@@ -22,6 +21,12 @@ const webpackConfig = {
   module: {
     rules: [
       {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'tslint-loader',
+        enforce: 'pre'
+      },
+      {
         test: /\.(sass|scss)$/,
         loaders: [
           'raw-loader',
@@ -37,15 +42,7 @@ const webpackConfig = {
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      options: {
-        context: path.join(__dirname,'../'),
-        output: { path :  path.join(__dirname,'../') },
-        sassLoader: {
-          includePaths: [
-            path.join(__dirname,'../node_modules')
-          ]
-        },
-      }
+      options: require('./loader-options')
     }),
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
