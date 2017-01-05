@@ -22,9 +22,12 @@
   "compileOnSave": true,
   "exclude": [
     "node_modules",
-    "**/*-aot.ts",
     "public",
-    "config"
+    "config",
+    "e2e",
+    "src/test.ts",
+    "src/**/*spec.ts",
+    "src/aot-compiled"
   ],
   "typeRoots": [
     "node_modules/@types"
