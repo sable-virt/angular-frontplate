@@ -6,36 +6,10 @@ const merge = require('webpack-merge');
 module.exports = function (production) {
   global.FRP_SRC = 'src';
   global.FRP_DEST = 'public';
-  const webpackConfig = merge({},require('./config/dev/webpack.config'));
-  delete webpackConfig.entry;
-  delete webpackConfig.output;
-  webpackConfig.plugins = [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        // context: path.join(__dirname),
-        // output: { path :  path.join(__dirname) },
-        // sassLoader: {
-        //   includePaths: [
-        //     path.join(__dirname,'node_modules')
-        //   ]
-        // },
-        postcss: {
-          plugins: [
-            require('autoprefixer')({
-              browsers: ['> 3% in JP']
-            })
-          ]
-        }
-      }
-    }),
-    new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      __dirname
-    )
-  ];
+  const webpackConfig = require('./config/webpack.test.config');
   return {
     clean: {
-      src: null
+      src: production ? FRP_DEST : null
     },
     style: {
       noGuide: true,
