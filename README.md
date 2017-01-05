@@ -65,9 +65,8 @@ npm run map
 
 ## ToDo
 
-- e2eテスト
-- ユニットテスト部分の拡充
-
+- カバレッジを取る仕組み
+- tslintの設定
 
 ## Dependencies documentation
 
