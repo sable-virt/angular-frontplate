@@ -36,7 +36,10 @@
     "build": "frp task script -c frp.dll.config.js && frp build",
     "serve": "frp serve",
     "serve:prod": "frp serve -p",
-    "production": "frp task script -p -c frp.dll.config.js && ngc -p tsconfig.json && frp build -p",
+    "aot": "ngc -p tsconfig.json",
+    "pree2e": "webdriver-manager update",
+    "e2e": "protractor -p protractor.conf.js",
+    "production": "npm run aot && ngc -p tsconfig.json && frp build -p",
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -w -s -r 0",
     "map": "source-map-explorer public/assets/js/app.js public/assets/js/maps/app.map"
   },
