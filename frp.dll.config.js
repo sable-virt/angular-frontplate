@@ -8,6 +8,6 @@ module.exports = function (production) {
     style: {
       noGuide: true
     },
-    script: production ? require('./config/prod/webpack.dll.config') : require('./config/dev/webpack.dll.config')
+    script: require('./config/dev/webpack.dll.config')
   }
 };
