@@ -1,8 +1,6 @@
 'use strict';
-const historyApiFallback = require('connect-history-api-fallback');
 const webpack = require('webpack');
-const path = require('path');
-const merge = require('webpack-merge');
+const historyApiFallback = require('connect-history-api-fallback');
 module.exports = function (production) {
   global.FRP_SRC = 'src';
   global.FRP_DEST = 'public';
@@ -31,12 +29,19 @@ module.exports = function (production) {
       middleware: [ historyApiFallback() ]
     },
     test: {
+      plugins: [
+        require('karma-jasmine'),
+        require('karma-webpack'),
+        require('karma-phantomjs-launcher'),
+        require('karma-mocha-reporter')
+      ],
       files: [
         `${FRP_SRC}/test.ts`
       ],
       preprocessors: {
-        '**/*': ['webpack']
+        '**/*.ts': ['webpack'],
       },
+      reporters: ['mocha'],
       webpack: webpackConfig
     },
     script: production ? require('./config/prod/webpack.config') : require('./config/dev/webpack.config')
